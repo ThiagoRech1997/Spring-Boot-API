@@ -5,7 +5,6 @@ services:
     image: "spring-agro-api"
     build: ./
     container_name: "Agro-API"
-    command: 
     restart: unless-stoped
     ports:
       - "8080:8080"
@@ -15,3 +14,18 @@ services:
       - mariadb
     depends_on:
       - mariadb
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=1234
+      - TZ=Europe/London
+      - MYSQL_DATABASE=db_agro
+    volumes:
+      - path_to_data:/config
+    ports:
+      - 3306:3306
+    restart: unless-stopped
