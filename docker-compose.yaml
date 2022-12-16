@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  springboot:
+    image: "spring-agro-api"
+    build: ./
+    container_name: "Agro-API"
+    command: 
+    restart: unless-stoped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/usr/api
+    links:
+      - mariadb
+    depends_on:
+      - mariadb
